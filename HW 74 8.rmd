@@ -1,0 +1,61 @@
+---
+title: "HW 7.4 (8th edition)"
+author: "Duong Ngo"
+date: "10/25/2019"
+output: pdf_document
+---
+## Problem 7.4.1
+a) The critical region is:
+```{r}
+qchisq(.05, df=10)
+```
+Thus, we reject $H_0$ if $t\leq 3.940299$
+b) The value of the test statistic is:
+```{r}
+a = read.csv("C:/Users/The Asian Kid/Desktop/Math 411/R Data/E7_4-01.txt", sep="")
+v1 = var(a[,1])
+(10*v1)/(525^2)
+```
+
+Since the value of the test statistic is outside the critical region, we cannot reject $H_0$  
+c) The p-value is:
+```{r}
+pchisq(4.103709, df =10)
+```
+
+## Problem 7.4.3
+a) The critical region is:
+```{r}
+qchisq(.95, df=24)
+```
+Thus, we reject $H_0$ if $t\leq 36.41503$
+b) The value of the test statistic for the given sample is:
+```{r}
+b = read.csv("C:/Users/The Asian Kid/Desktop/Math 411/R Data/E7_4-03.txt", sep="")
+v2 = var(b[,1])
+(24*v2)/(140^2)
+```
+
+Since the value of the test statistic is outside the critical region, we cannot reject $H_0$ and conclude that the variance differs
+
+## Problem 7.4.8
+The value of the test statistic is:
+```{r}
+9.88/4.08
+```
+The value of the critical region is:
+```{r}
+qf(0.95, 12, 8)
+```
+Since the value of the test statistic is within the critical region, we cannot reject $H_0$, thus the ratio of variance of both variable is like to equal 1
+
+## Problem 7.4.10
+The value of the test statistic is:
+```{r}
+9201/4856
+```
+The value of the critical region is:
+```{r}
+qf(0.95, 6, 9)
+```
+Since the value of the test statistic is within the critical region, we cannot reject $H_0$, thus the ratio of variance of both variable is like to equals 1

@@ -1,0 +1,87 @@
+---
+title: "HW82"
+author: "Duong Ngo"
+date: "10/22/2019"
+output: pdf_document
+---
+
+In the coming problems, we would refer to the following formula:  
+(1) T test for underlying normal distribution with common (unknown) variance  
+$T = \frac{\bar{X}-\bar{Y}}{S_p\sqrt{1/n+1/m}}$ where $S_p = \sqrt{\frac{(n-1)S^2_x+(m-1)S^2_y}{n+m-2}}$  
+(2) T test for underlying normal distribution with known (different) variance $\sigma^2_x$ and $\sigma^2_y$  
+$Z = \frac{\bar{X}-\bar{Y}}{\sqrt{\frac{\sigma^2_x}{n}+\frac{\sigma^2_y}{m}}}$  
+(3) T test for underlying normal distribution with unknown variance, sample size both $\geq 30$
+$Z = \frac{\bar{X}-\bar{Y}}{\sqrt{\frac{S^2_x}{n}+\frac{S^2_y}{m}}}$  
+
+## Problem 8.2.1
+a) According to table 8.2.1, the critical region value is:  
+```{r}
+qt(0.05, 10+10-2)
+```
+The critical region is thus:  
+```{r, out.width="300px", out.height="300px"}
+xseq=seq(-4,4,.01)
+densities=dnorm(xseq, 0,1)
+plot(xseq, densities,xlab="", ylab="Density", type="l", main="PDF of Standard Normal")
+```
+b)
+```{r}
+a = read.delim('8_2-01.txt', header = FALSE)
+t.test(a[,1],a[,2], alternative = "less", conf.level =0.95)
+```
+Since $p<0.5$, we reject the null hypothesis $H_0$
+c)
+```{r}
+ap = data.frame(a[,1], a[,2])
+boxplot(ap)
+```
+From the boxplot, we can confirm the hypothesis that $\mu_x<\mu_y$
+
+## Problem 8.2.2
+a) Since we assume the variance is equal, the test statistic is computed using equation (1):  
+$T = \frac{\bar{X}-\bar{Y}}{S_p\sqrt{27}}$ where $S_p = \sqrt{\frac{15S^2_x+12S^2_y}{27}}$   
+According to table 8.2.1, the critical region value for $\alpha= 0.01$ is:
+```{r}
+-qt(0.01, 27)
+```
+i.e: t$\geq 2.47266$  
+b) With the given values, the value of the test statistic is:
+```{r}
+(415.16-347.4)/sqrt((15*1356.75+12*692.21)/27*(1/16+1/13))
+```
+Since the value of the test statistic is within the critical region, we reject $H_0$ and conclude $\mu_x>\mu_y$
+c) Using Welsch t-test, first we find the approximate degree of freedom needed:
+```{r}
+floor((1356.75/16+692.21/13)^2/(((1356.75/16)^2)/15+((692.21/13)^2)/12))
+```
+Thus, using table 8.2.1, the critical region value for $\alpha= 0.01$ is:
+```{r}
+-qt(0.01, 26)
+```
+i.e: t$\geq 2.47863$  
+The value of the test statistic is:
+```{r}
+(415.16-347.4)/sqrt(1356.75/16+692.21/13)
+```
+Since the value of the test statistic is still within the critical region, we reject $H_0$ and conclude $\mu_x>\mu_y$  
+
+## Problem 8.2.12
+a) The critical region value for $\alpha = 0.025$ for one-sided alternative hypothesis is:
+```{r}
+-qnorm(0.975)
+```
+i.e: $z\leq -1.959964$
+b) Hypothesis testing using R:
+```{r}
+b = read.table('7_2-05.txt')
+t.test(b[,1],b[,2], alternative = "less", conf.level = 0.975)
+```
+Since the p-value is less than $\alpha$, we reject $H_0$ at 2.5% signifcance level.  
+c) Box-whisker plot:
+```{r}
+bp = data.frame(b[,1], b[,2])
+boxplot(bp)
+```
+From the boxplot, we can confirm the hypothesis that $\mu_x<\mu_y$
+
+

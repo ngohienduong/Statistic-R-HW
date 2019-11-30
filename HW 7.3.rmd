@@ -1,0 +1,108 @@
+---
+title: "Homework 7.3"
+author: "Duong Ngo"
+date: "9/29/2019"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Problem 7.3.1
+a) The point estimate of p is:  
+```{r}
+ep1 = 24/642
+24/642
+```
+b) The 95% confidence interval for p from equation 7.3.2 is:
+```{r}
+cbind(ep1-qnorm(0.975)*sqrt((ep1*(1-ep1))/624), ep1+qnorm(0.975)*sqrt((ep1*(1-ep1))/624))
+```
+c) The 95% confidence interval for p from equation 7.3.4 is: 
+```{r}
+n1 = qnorm(.975)
+cbind((ep1+n1^2/(2*624)-n1*sqrt((ep1-ep1^2)/624+n1^2/(4*624^2)))/(1+(n1^2/624)),(ep1+n1^2/(2*624)+n1*sqrt((ep1-ep1^2)/624+n1^2/(4*624^2)))/(1+(n1^2/624)))
+```      
+d) The 95% confidence interval for p from equation 7.3.5 is:
+```{r}
+ep12 = (24+2)/(624+4)
+cbind(ep12-qnorm(.975)*sqrt((ep12-ep12^2)/(624+4)),ep12+qnorm(.975)*sqrt((ep12-ep12^2)/(624+4)))
+```
+
+e) The one-sided confidence interval for p that provides an upper bound is:
+```{r}
+cbind(0,ep1+qnorm(.95)*sqrt((ep1-ep1^2)/624))
+```
+
+## Problem 7.3.2
+a) Give a point estimate of p:
+```{r}
+ep2 = 142/200
+```
+b) Find 90% confidence interval for p using equation 7.3.2:
+```{r}
+cbind(ep2-qnorm(0.95)*sqrt((ep2*(1-ep2))/200), ep2+qnorm(0.95)*sqrt((ep2*(1-ep2))/200))
+```
+c) Find 90% confidence interval for p using equation 7.3.4
+```{r}
+n2 = qnorm(.95)
+cbind((ep2+n2^2/(2*200)-n2*sqrt((ep2-ep2^2)/200+n2^2/(4*200^2)))/(1+(n2^2/200)),(ep2+n2^2/(2*200)+n2*sqrt((ep2-ep2^2)/200+n2^2/(4*200^2)))/(1+(n2^2/200)))
+```
+d) Find 90% confidence interval for p using equation 7.3.5
+```{r}
+ep22 = (142+2)/(200+4)
+cbind(ep22-qnorm(.95)*sqrt((ep22-ep22^2)/(200+4)),ep22+qnorm(.95)*sqrt((ep22-ep22^2)/(200+4)))
+```
+e) The one-sided confidence interval for p that provides a lower bound is:
+```{r}
+cbind(ep2-qnorm(0.9)*sqrt((ep2-ep2^2)/200),1)
+```
+
+## Problem 7.3.5
+a) Give a point estimate for p:
+```{r}
+ep3 = 9/50
+```
+b) Find 90% confidence interval for p using equation 7.3.2:
+```{r}
+cbind(ep3-qnorm(0.975)*sqrt((ep3*(1-ep3))/50), ep3+qnorm(0.975)*sqrt((ep3*(1-ep3))/50))
+```
+c) Find 90% confidence interval for p using equation 7.3.4
+```{r}
+n3 = qnorm(.975)
+cbind((ep3+n3^2/(2*50)-n3*sqrt((ep3-ep3^2)/50+n3^2/(4*50^2)))/(1+(n3^2/50)),(ep3+n3^2/(2*50)+n3*sqrt((ep3-ep3^2)/50+n3^2/(4*50^2)))/(1+(n3^2/50)))
+```
+d) Find 90% confidence interval for p using equation 7.3.5
+```{r}
+ep32 = (9+2)/(50+4)
+cbind(ep32-qnorm(.975)*sqrt((ep32-ep32^2)/(50+4)),ep32+qnorm(.975)*sqrt((ep32-ep32^2)/(50+4)))
+```
+
+## Problem 7.3.7
+The 90% confidence interval for p1-p2 is:
+```{r}
+p1 = 840/2100
+p2 = 323/1900
+cbind(p1-p2-qnorm(.95)*sqrt((p1-p1^2)/2100+(p2-p2^2)/1900),p1-p2+qnorm(.95)*sqrt((p1-p1^2)/2100+(p2-p2^2)/1900))
+```
+## Problem 7.3.10
+a) Give a point estimate of p1:
+```{r}
+ep101 = 28/194
+```
+b) Give the endpoints for the 95% confidence interval for p1:
+```{r}
+cbind(ep101-qnorm(0.975)*sqrt((ep101*(1-ep101))/194), ep101+qnorm(0.975)*sqrt((ep101*(1-ep3))/194))
+```
+c) Give the point estimate for p1-p2
+```{r}
+ep102 = 28/194 - 11/162
+```
+d) Find 95% confidence interval that gives lower bound for p1 - p2
+```{r}
+p11 = 28/194
+p12 = 11/162
+cbind(ep102-qnorm(0.95)*sqrt((p11-p11^2)/194+(p12-p12^2)/162),1)
+```
+123  123

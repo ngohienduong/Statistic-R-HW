@@ -1,0 +1,107 @@
+---
+title: "HW 7.4"
+author: "Duong Ngo"
+date: "10/5/2019"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Problem 7.4.1
+The sample size n needed here is:
+```{r}
+(qnorm(.975)^2*4.84/0.4^2)
+```
+
+Rounding up, the needed sample size is 117  
+
+## Problem 7.4.2
+The sample size n needed here is:
+```{r}
+(qnorm(.975)^2*169/1.5^2)
+```
+Rounding up, the needed sample size is 289
+
+## Problem 7.4.3
+a) The needed sample size is:
+```{r}
+(qnorm(.95)^2*0.02^2/0.001^2)
+```
+Rounding up, the needed sample size is 1083  
+b) The 90% confidence interval of the mean is:
+```{r}
+c1 = cbind(6.048-qnorm(.95)*(0.022/sqrt(1219)),6.048+qnorm(.95)*(0.022/sqrt(1219)))
+c1
+```
+c) The new estimated mean is:
+```{r}
+c=(c1[,1]+c1[,2])/2
+c
+```
+Thus the estimated saving per year after the new adjustment is:
+```{r}
+14000*((6.09-c)/0.01)
+```
+d) Assume boxes weight is normally distributed with $\mu= 6.048$ and $\sigma = 0.022$. Hence:  
+\begin{align*}
+&P(X<6)=P(\frac{6-6.048}{0.022})\\
+&P(X<6)=P(Z<-2.18)\\
+&P(X<6)=1-\theta(2.18)\approx 0.0146
+\end{align*}
+Equivalently, 0.0146 of the boxes are less than 6 pounds.
+
+## Problem 7.4.7
+a) The needed sample to get 0.03 margin of error with 95% confidence is:
+```{r}
+ceiling(qnorm(.975)^2/(4*0.03^2))
+```
+b) The needed sample to get 0.02 margin of error with 95% confidence is:
+```{r}
+ceiling(qnorm(.975)^2/(4*0.02^2))
+```
+c) The needed sample to get 0.03 margin of error with 90% confidence is:
+```{r}
+ceiling(qnorm(.95)^2/(4*0.03^2))
+```
+## Problem 7.4.8
+The needed sample size n is:
+```{r}
+p8 = 54/137
+ceiling(qnorm(.95)^2*(p8-p8^2)/0.04^2)
+```
+
+## Problem 7.4.9
+```{r}
+p9 = 54/137
+ceiling(qnorm(.95)^2*(p8-p8^2)/0.04^2)
+```
+
+## Problem 7.4.12
+a) First we find m value from equation 7.4.2:
+```{r}
+m1 = ceiling(qnorm(.975)^2*(1/2-1/2^2)/0.04^2)
+m1
+```
+Then substituing m1, we obtain the needed sample size n1 when the population size is 1500:
+```{r}
+n1 = ceiling(m1/(1+(m1-1)/1500))
+n1
+```
+b) For the population size 15000, the needed sample size is:
+```{r}
+n2 = ceiling(m1/(1+(m1-1)/15000))
+n2
+```
+c) For the population size 25000, the needed sample size is:
+```{r}
+n3 = ceiling(m1/(1+(m1-1)/25000))
+n3
+```
+  
+    
+      
+      
+## Problem 7.4.14
+

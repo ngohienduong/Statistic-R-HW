@@ -1,0 +1,120 @@
+---
+title: "HW 8.3"
+author: "Duong Ngo"
+date: "10/25/2019"
+output: pdf_document
+---
+## Problem 8.3.1
+a) The significance level $\alpha$ error of the test is:
+```{r}
+pbinom(6, 100, 0.08)
+```
+b) The significance level $\beta$ error of the test is:
+```{r}
+1-pbinom(6, 100, 0.04)
+```
+
+## Problem 8.3.3
+a)
+```{r}
+1 - pbinom(151, 192, 0.75)
+```
+b)
+```{r}
+pbinom(151, 192, 0.8)
+```
+
+## Problem 8.3.6
+The value of our test statistic for proportion here is
+```{r}
+p6 = 273/390
+(p6-0.75)/sqrt(0.75*0.25/390)
+```
+a) The critical region for  $\alpha = 0.05$ is:
+```{r}
+-qnorm(0.95)
+```
+i.e: $p\leq-1.644854$
+Since value of the test statistic is in the critical region, we reject $H_0$ at $\alpha = 0.05$
+
+b) The critical region for  $\alpha = 0.1$ is:
+```{r}
+-qnorm(0.99)
+```
+Since value of the test statistic is not the critical region, we fail to reject $H_0$ at $\alpha = 0.05$  
+c)The p value is:
+```{r}
+pnorm(-2.280)
+```
+
+## Problem 8.3.7
+a) The critical region is:
+```{r}
+qnorm(0.95)
+```
+i.e: $p\geq 1.644854$  
+b) The value of the test statistic is:
+```{r}
+p7 = 550/1278
+(p7 -0.4)/sqrt(0.4*0.6/1278)
+```
+Since the value of the test statistic falls into the critical region, we reject $H_0$ at $\alpha=0.05$ significance level
+
+## Problem 8.3.8
+a)  
+$H_0$ is p = 0.14
+$H_1$ is p > 0.14
+b) The critical region is:
+```{r}
+qnorm(0.99)
+```
+i.e: $p\geq2.326348$  
+
+c) The value of the test statistic is:
+```{r}
+p8 = 104/590
+(p8-0.14)/sqrt(0.14*0.86/590)
+```
+Since the value of the test statistic is within the critical region, we reject $H_0$
+
+## Problem 8.3.11
+a)
+The two-tailed critical region is:
+```{r}
+qnorm(0.975)
+```
+i.e: $p\leq - 1.959964$ or $p\geq  1.959964$  
+The sketch of critical region (2 tailed):
+```{r, out.width="300px", out.height="300px"}
+xseq=seq(-4,4,.01)
+densities=dnorm(xseq, 0,1)
+plot(xseq, densities,xlab="", ylab="Density", type="l", main="PDF of Standard Normal")
+```
+
+b) The value of the test statistic is:
+```{r}
+p111 = 37/1000
+p211 = 53/1000
+p311 = (37+53)/2000
+(p111-p211)/sqrt(p311*(1-p311)*(2/1000))
+```
+Thus, the value of the test statistic is outside the critical region and we reject $H_0$ at $\alpha = 0.05$ significance level
+
+## Problem 8.3.14
+a) The critical region is:
+```{r}
+qnorm(0.95)
+```
+i.e: $p\geq 1.644854$
+b) The value of the test statistic is:
+```{r}
+p114 = 135/900
+p214 = 77/700
+p314 = (135+77)/(900+700)
+(p114-p214)/sqrt(p314*(1-p314)*(1/900+1/700))
+```
+Since the value of the test statistic is in the critical region, we reject $H_0$  
+c) The p value is:
+```{r}
+1-pnorm(2.341)
+```

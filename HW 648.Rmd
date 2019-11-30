@@ -1,0 +1,107 @@
+---
+title: "Homework 6.4 (8th edition)"
+author: "Duong Ngo"
+date: "9/26/2019"
+output: pdf_document
+header-includes: 
+    - \usepackage{amsmath}
+---
+
+```{r setup}
+knitr::opts_knit$set(root.dir = 'C:/Users/The Asian Kid/Desktop/Math 411/R Data')
+```
+
+## Problem 6.4.2
+a) Find point estimate of $\sigma$  
+```{r}
+a = read.table('E6_4-02.txt')
+v642 = var(a)
+sqrt(v642)
+```
+b) Find 95% confidence interval for $\sigma$  
+```{r}
+cbind(sqrt((9-1)*v642/qchisq(.975,(9-1))), sqrt((9-1)*v642/qchisq(.025,(9-1))))
+```
+c) Find 90% confidence interval for $\sigma$  
+```{r}
+cbind(sqrt((9-1)*v642/qchisq(.95,(9-1))), sqrt((9-1)*v642/qchisq(.05,(9-1))))
+```
+
+## Problem 6.4.3
+a) Calculate the sample mean and sample variance for the data  
+```{r}
+b =  read.table('E6_4-03.txt')
+v643 = var(b)
+m643 = mean(b[,1])
+v643
+m643
+```
+b) The 90% confidence interval for $\sigma^2$ is:  
+```{r}
+cbind((25-1)*v643/qchisq(.95,(25-1)), (25-1)*v643/qchisq(.05,(25-1)))
+```
+
+c) The 90% confidence interval for $\sigma$ is:  
+```{r}
+cbind(sqrt((25-1)*v643/qchisq(.95,(25-1))), sqrt((25-1)*v643/qchisq(.05,(25-1))))
+```
+d) Consider the qqplot of the data:  
+```{r}
+qqplot(b[,1], rnorm(26))
+```
+Since the qqplot of the data form approximately a straightline, the assumption of normality is valid.  
+
+## Problem 6.4.4
+a) The 95% confidence interval of $\sigma^2$ is:  
+```{r}
+c = read.table('E6_4-04.txt')
+cbind((10-1)*var(c)/qchisq(.975,(10-1)), (10-1)*var(c)/qchisq(.025,(10-1)))
+```
+b) The 95% confidence interval of $\sigma$ is:
+```{r}
+cbind(sqrt((10-1)*var(c)/qchisq(.975,(10-1))), sqrt((10-1)*var(c)/qchisq(.025,(10-1))))
+```
+
+## Problem 6.4.10
+a) The point estimate for $\sigma_x^2/\sigma_y^2$ is:  
+```{r}
+0.004/0.0076
+```
+b) The 95% confidence interval for $\sigma_x^2/\sigma_y^2$ is:  
+```{r}
+cbind(1/qf(.975, 10-1, 9-1)*0.004/0.0076, qf(.975, 9-1, 10-1)*0.004/0.0076)
+```
+
+## Problem 6.4.12
+The 90% confidence interval for $\sigma_x^2/\sigma_y^2$ is:  '
+```{r}
+cbind(1/qf(.95, 16-1, 13-1)* 0.197^2/ 0.318^2, qf(.95, 13-1, 16-1)* 0.197^2/ 0.318^2)
+```
+Thus the 90% confidence interval for $\sigma_x/\sigma_y$ is:  
+```{r}
+cbind(sqrt(1/qf(.95, 16-1, 13-1)* 0.197^2/ 0.318^2), sqrt(qf(.95, 13-1, 16-1)* 0.197^2/ 0.318^2))
+```
+
+## Problem 6.4.13
+a) The point estimate for $\sigma_x^2/\sigma_y^2$ is:  
+```{r}
+e = read.delim('E6_4-13.txt', header= FALSE)
+var(e[,1], na.rm = TRUE)/var(e[,2], na.rm = TRUE)
+```
+b) The upper bound for the 95% confidence interval of $\sigma_x^2/\sigma_y^2$ is:
+```{r}
+qf(.95, 10-1, 8-1)*var(e[,1], na.rm = TRUE)/var(e[,2], na.rm = TRUE)
+```
+
+## Problem 6.4.14
+a) The 95% confidence interval for $\sigma_x^2/\sigma_y^2$ is:
+```{r}
+f = read.table('E6_4-14.txt')
+cbind(1/qf(.975, 14-1, 14-1)* var(f[,1])/ var(f[,2]), qf(.975, 14-1, 14-1)* var(f[,1])/var(f[,2]))
+```
+b) The 95% confidence interval for $\sigma_x/\sigma_y$ is:  
+```{r tidy= TRUE}
+f = read.table('E6_4-14.txt')
+cbind(sqrt(1/qf(.975, 14-1, 14-1)* var(f[,1])/ var(f[,2])), sqrt(qf(.975, 14-1, 14-1)* var(f[,1])/var(f[,2])))
+```
+

@@ -1,0 +1,434 @@
+---
+title: "Regression Homework Section 6.5 and 7.6"
+author: "Duong Ngo"
+date: "11/12/2019"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Problem 6.5.4
+First, we import the dataset
+```{r}
+dataset654 = read.table('6_5-04.txt')
+```
+a) Find the least square regression line for the data:
+```{r}
+predictedscore = dataset654[,1]
+actualscore= dataset654[,2]
+lm654 = lm(formula = actualscore~predictedscore)
+lm654
+```
+Thus the equation for the least square regression line is: $\hat{y}=0.06016+0.92063x$  
+b) Plot the least square regression line:
+```{r}
+plot(predictedscore, actualscore, xlab = "Student predicted Score", ylab = 'Student test score')
+abline(lm654)
+```
+c) Find the value of $\hat{\sigma^2}$:
+```{r}
+summary(lm654)
+```
+Since the residual standard error is 0.4808, the value of $\hat{\sigma^2}$ is:
+```{r}
+0.4804^2*8/10
+```
+d) Residual analyses (scatterplot of the residuals, qqnorm, and qqline)
+```{r}
+summary(lm654)
+plot(residuals(lm654))
+qqnorm(residuals(lm654))
+qqline(residuals(lm654))
+```
+
+## Problem 6.5.5
+First we import the dataset:
+```{r}
+dataset655 = read.table('6_5-05.txt')
+```
+a) Find the least square regression for “0–60” versus horsepower
+```{r}
+carhorsepower = dataset655[,1]
+car060 = dataset655[,2]
+carweight = dataset655[,3]
+lm655 = lm(formula = car060~carhorsepower)
+lm655
+```
+Thus the equation for the least square regression line is $\hat{y}=10.60946-0.01499x$  
+b) Plot the least square regression line:
+```{r}
+plot(carhorsepower, car060, ylab = "Time car take to 60mph", xlab = 'Car Horsepower')
+abline(lm655)
+```
+c) Find the least square regression for “0–60” versus weight
+```{r}
+lm655b = lm(formula = car060~carweight)
+lm655b
+```
+Thus the equation for the least square regression line is $\hat{y}=5.4712708-0.0003951$
+d) Plot the least square regression line:
+```{r}
+plot(carweight, car060, xlab = "Car Weight", ylab = "Time car take to 60mph")
+abline(lm655b)
+```
+e) First we look at the summary of the plot
+```{r}
+summary(lm655)
+summary(lm655b)
+```
+Since the residual standard error of carhorsepower is less than the residual standard error for carweight ($0.7015<1.214$), the car horsepower has more effect than car car weight.  
+f) Residual analyses (scatterplot of the residuals, qqnorm, and qqline) of plotting against car horsepower:
+```{r}
+summary(lm655)
+plot(residuals(lm655))
+qqnorm(residuals(lm655))
+qqline(residuals(lm655))
+```
+```{r}
+summary(lm655)
+plot(residuals(lm655b))
+qqnorm(residuals(lm655b))
+qqline(residuals(lm655b))
+```
+
+## Problem 6.5.6
+Importing the data set for this problem:
+```{r}
+dataset656 = read.table('6_5-06.txt')
+```
+a) Find the least square regression line:
+```{r}
+socialsciencescore = dataset656[,1]
+naturalsciencescore = dataset656[,2]
+lm656=lm(naturalsciencescore~socialsciencescore)
+lm656
+```
+Then the linear regression line is: $\hat{y}=7.3824-0.5956$  
+b) Plot the least square regression line:
+```{r}
+plot(socialsciencescore, naturalsciencescore, xlab = "Student Social Science Score", ylab = "Student Natural Science score")
+abline(lm656)
+```
+c) Find point estimate of $\alpha$, $\beta$, and $\sigma^2$  
+The point estimate of $\alpha$ is:
+```{r}
+attributes(lm656)
+lm656$coefficients[1]
+```
+The point estimate of $\beta$ is:
+```{r}
+lm656$coefficients[2]
+```
+
+```{r}
+summary(lm656)
+```
+The point estimate for $\sigma^2$ is:
+```{r}
+4.037^2*13/15
+```
+d) Residual analyses (scatterplot of the residuals, qqnorm, and qqline)
+```{r}
+summary(lm656)
+plot(residuals(lm656))
+qqnorm(residuals(lm656))
+qqline(residuals(lm656))
+```
+
+## Problem 6.5.7
+Importing the dataset:
+```{r}
+dataset657 = read.table('6_5-07.txt')
+```
+a) Find the least regression line:
+```{r}
+tarmeasurement = dataset657[,1]
+COmeasurement = dataset657[,2]
+lm657 = lm(COmeasurement~tarmeasurement)
+lm657
+```
+From the linear model, we conclude the linear regression line is $\hat{y} =2.5753 +0.8191x$
+b) Plot the least square regression line:
+```{r}
+plot(tarmeasurement, COmeasurement, xlab = "Tar measure of cigarette by brand", ylab="Carbon Monoxide measure of cigarette by brand")
+abline(lm657)
+```
+c) Find point estimate of $\alpha$, $\beta$, and $\sigma^2$  
+The point estimate of $\alpha$ is:
+```{r}
+attributes(lm657)
+lm657$coefficients[1]
+```
+The point estimate of $\beta$ is:
+```{r}
+lm657$coefficients[2]
+```
+The point estimate of $\sigma^2$ is:
+```{r}
+summary(lm657)
+1.988^2*10/12
+```
+d) Residual analyses (scatterplot of the residuals, qqnorm, and qqline)
+```{r}
+summary(lm657)
+plot(residuals(lm657))
+qqnorm(residuals(lm657))
+qqline(residuals(lm657))
+```
+
+## Problem 6.5.8
+Importing the data set:
+```{r}
+dataset658 = read.table('6_5-08.txt')
+```
+a) Find the least square regression line for highway mpg and city mpg
+```{r}
+citympg = dataset658[,2]
+highwaympg = dataset658[,3]
+curbweight = dataset658[,4]
+lm658 = lm(highwaympg~citympg)
+lm658
+```
+Thus the least square regression line is $\hat{y} = 3.575 + 1.225x$  
+b) Plot the least square regression line:
+```{r}
+plot(citympg, highwaympg, xlab = "Miles per gallon in the city", ylab = "Miles per gallon on highway")
+abline(lm(highwaympg~citympg))
+```
+c) Repeat for highway vs curbweight
+```{r}
+lm658b = lm(highwaympg~curbweight)
+lm658b
+```
+The least square regression line is $\hat{y} = 55.674463 -0.007496x$ Now we plot the least square regression line:
+```{r}
+plot(curbweight, highwaympg, xlab= "Car Curb Weight", ylab = "Car miles per gallon in the city")
+abline(lm658b)
+```
+d) Residual analyses (scatterplot of the residuals, qqnorm, and qqline) of plotting car mpg in the city against car mpg on highway:
+```{r}
+summary(lm658)
+plot(residuals(lm658))
+qqnorm(residuals(lm658))
+qqline(residuals(lm658))
+```
+Residual analyses (scatterplot of the residuals, qqnorm, and qqline) of plotting car curbweight against car mpg on highway:
+```{r}
+summary(lm658b)
+plot(residuals(lm658b))
+qqnorm(residuals(lm658b))
+qqline(residuals(lm658b))
+```
+
+## Problem 7.6.4
+NOTE: For problem 7.6.4 and 7.6.5, the confidence interval is the return value of (lwr, upr)
+a) For x = 2
+```{r}
+dataset764 = read.table('6_5-04.txt')
+attach(dataset764)
+data.lm = lm(V2~V1)
+newdata=data.frame(V1=2)
+predict.lm(data.lm,newdata,interval="confidence")
+detach(dataset764)
+```
+For x = 3
+```{r}
+dataset764 = read.table('6_5-04.txt')
+attach(dataset764)
+data.lm = lm(V2~V1)
+newdata=data.frame(V1=3)
+predict.lm(data.lm,newdata,interval="confidence")
+detach(dataset764)
+```
+For x = 4
+```{r}
+dataset764 = read.table('6_5-04.txt')
+attach(dataset764)
+data.lm = lm(V2~V1)
+newdata=data.frame(V1=4)
+predict.lm(data.lm,newdata,interval="confidence")
+detach(dataset764)
+```
+b) For x = 2
+```{r}
+dataset764 = read.table('6_5-04.txt')
+attach(dataset764)
+data.lm = lm(V2~V1)
+newdata=data.frame(V1=2)
+predict.lm(data.lm,newdata,interval="predict")
+detach(dataset764)
+```
+For x = 3
+```{r}
+dataset764 = read.table('6_5-04.txt')
+attach(dataset764)
+data.lm = lm(V2~V1)
+newdata=data.frame(V1=3)
+predict.lm(data.lm,newdata,interval="predict")
+detach(dataset764)
+```
+For x = 4
+```{r}
+dataset764 = read.table('6_5-04.txt')
+attach(dataset764)
+data.lm = lm(V2~V1)
+newdata=data.frame(V1=4)
+predict.lm(data.lm,newdata,interval="predict")
+detach(dataset764)
+```
+
+## Problem 7.6.5
+a) For x = 5
+```{r}
+dataset765 = read.table('6_5-07.txt')
+attach(dataset765)
+data.lm = lm(V2~V1)
+newdata=data.frame(V1=5)
+predict.lm(data.lm,newdata,interval="confidence")
+detach(dataset765)
+```
+For x = 10
+```{r}
+dataset765 = read.table('6_5-07.txt')
+attach(dataset765)
+data.lm = lm(V2~V1)
+newdata=data.frame(V1=10)
+predict.lm(data.lm,newdata,interval="confidence")
+detach(dataset765)
+```
+For x = 15
+```{r}
+dataset765 = read.table('6_5-07.txt')
+attach(dataset765)
+data.lm = lm(V2~V1)
+newdata=data.frame(V1=15)
+predict.lm(data.lm,newdata,interval="confidence")
+detach(dataset765)
+```
+b) For x = 5
+```{r}
+dataset765 = read.table('6_5-07.txt')
+attach(dataset765)
+data.lm = lm(V2~V1)
+newdata=data.frame(V1=5)
+predict.lm(data.lm,newdata,interval="predict")
+detach(dataset765)
+```
+For x = 10
+```{r}
+dataset765 = read.table('6_5-07.txt')
+attach(dataset765)
+data.lm = lm(V2~V1)
+newdata=data.frame(V1=10)
+predict.lm(data.lm,newdata,interval="predict")
+detach(dataset765)
+```
+For x = 15
+```{r}
+dataset765 = read.table('6_5-07.txt')
+attach(dataset765)
+data.lm = lm(V2~V1)
+newdata=data.frame(V1=15)
+predict.lm(data.lm,newdata,interval="predict")
+detach(dataset765)
+```
+
+## Problem 7.6.8
+Inputing data:
+```{r}
+dataset768 = read.table('7_6-08.txt')
+```
+Fitting the regression line:
+```{r}
+lm(formula= dataset768[,3]~dataset768[,1]+dataset768[,2])
+```
+Thus the regression line is $\hat{y} = 0.7342 + 2.587x_1 + 0.9604x_2$
+
+## Problem 7.6.9
+Inputing data:
+```{r}
+dataset769 = read.table('7_6-09.txt')
+```
+Fitting the regression line:
+```{r}
+x = dataset769[,1]
+y = dataset769[,2]
+xsq = x^2
+xc = x^3
+lm(formula= y~x+xsq+xc)
+```
+Thus the regression line is $\hat{y} = 1.1037 +2.0327x -0.2974x^2 +0.6204x^3$
+
+## Problem 7.6.10
+c) Plot the linear regression line:
+```{r}
+dataset7610 = read.table('7_6-10.txt')
+p7610c = lm(dataset7610[,2]~dataset7610[,1])
+plot(dataset7610[,1], dataset7610[,2], xlab = "Data X", ylab = "Data Y")
+abline(p7610c)
+```
+d) Residual plot
+```{r}
+summary(p7610c)
+plot(residuals(p7610c))
+segments(0,0, x1 = 30, y1 = 0)
+```
+Since the points are not randonly distributed above and below y=0, a linear regression fit is not appropriate
+
+## Problem 7.6.11
+Inputting the data
+```{r}
+data7611 = read.table('7_6-11.txt')
+```
+a) Find the correlation coefficient:
+```{r}
+cor(data7611[,1], data7611[,2])
+```
+b) Find least square linear regression line:
+```{r}
+lm7611 = lm(data7611[,2]~data7611[,1])
+lm(data7611[,2]~data7611[,1])
+```
+Thus the equation for the least square regression line is $\hat{y}= 37.6834 + 0.8276x$  
+c) Plot the least square regression line:
+```{r}
+plot(data7611[,1], data7611[,2], xlab = "Rainfall in June at Holland, Michigan", ylab = "Blueberry productions (in pounds) at Westview BlueBerry Farm")
+abline(lm7611)
+```
+d) Find and plot the residuals
+```{r}
+summary(lm7611)
+plot(residuals(lm7611))
+segments(0,0, x1 = 13, y1 = 0)
+```
+Since the points are not randonly distributed above and below y=0, a linear regression fit is not appropriate  
+e) Find the least square regression quadratic curve
+```{r}
+m= data7611[,1]
+n= data7611[,2]
+msq = m^2
+lm(formula = n~m+msq)
+```
+Thus the least square regression quadratic curve is $y = 12.845 + 22.566x -3.218x^2$
+f)
+```{r}
+summary(lm(formula = n~m+msq))
+plot(residuals(lm(formula = n~m+msq)))
+segments(0,0, x1 = 13, y1 = 0)
+```
+Since the points are randomly distribution above and below y=0, a linear regression fit is appropriate   
+g) The blueberry production in thousands of pounds from Westview Blueberry Farm has a quadratic relationship with the amount of rainfall in Michigan.
+
+## Problem 7.6.16
+```{r}
+confint(lm654)
+```
+The intercept represent the conf. interval for $\alpha$, and the other value represent the conf. interval for $\beta$
+
+## Problem 7.6.17
+```{r}
+confint(lm657)
+```
+The intercept represent the conf. interval for $\alpha$, and the other value represent the conf. interval for $\beta$

@@ -1,0 +1,230 @@
+---
+title: "Test 4 Take Home"
+author: "Duong Ngo"
+date: "11/23/2019"
+output: pdf_document
+---
+
+```{r setup, include=TRUE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Importing the data set
+```{r}
+setwd('C:/Users/The Asian Kid/Desktop/Math 411/R Data')
+dataset = read.table('ngo.txt')
+```
+# Finding the best model
+
+### A) The linear model
+
+#### 1) Run simple linear regression on the data
+```{r}
+linearmodel = lm(dataset, formula = V2~V1)
+linearmodel
+```
+
+#### 2) Determine the point estimate of $\alpha$ and $\beta$, along with $R^2$:
+```{r}
+attributes(linearmodel)
+```
+
+##### a) Determine the point estimate of $\alpha$ and $\beta$:
+```{r}
+linearmodel$coefficients[1]
+linearmodel$coefficients[2]
+```
+
+##### b) Determine $R^2$
+```{r}
+summary(linearmodel)
+```
+
+#### 3) Residual analysis:
+```{r}
+plot(residuals(linearmodel))
+qqnorm(residuals(linearmodel))
+qqline(residuals(linearmodel))
+```
+
+#### 4) Plot of the linear regression line:
+```{r}
+plot(dataset[,1], dataset[,2], xlab = "X", ylab = "y", main = "Linear regression Plot")
+abline(linearmodel)
+```
+
+### B) The quadratic model
+
+#### 1) Run quadratic model regression on the data:
+```{r}
+attach(dataset)
+xsq = V1^2
+quadmodel = lm(dataset, formula = V2~V1+xsq)
+quadmodel
+detach(dataset)
+```
+
+#### 2) Determine the point estimate of $\alpha$ and $\beta$, along with $R^2$:
+```{r}
+attributes(quadmodel)
+```
+
+##### a) Determine the point estimate of $\alpha$ and $\beta$:
+```{r}
+quadmodel$coefficients[1]
+quadmodel$coefficients[2]
+quadmodel$coefficients[3]
+```
+
+##### b) Determine $R^2$
+```{r}
+summary(quadmodel)
+```
+#### 3) Residual analysis:
+```{r}
+plot(residuals(quadmodel))
+qqnorm(residuals(quadmodel))
+qqline(residuals(quadmodel))
+```
+
+#### 4) Plot of the linear regression line:
+```{r}
+plot(dataset[,1], dataset[,2], xlab = "X", ylab = "y", main = "Linear regression Plot")
+tvqm = seq(0, 20, 0.1)
+pcqm = predict(quadmodel, list(V1=tvqm, xsq=tvqm^2))
+lines(tvqm, pcqm, lwd=3)
+```
+
+### C) The cubic model
+
+#### 1) Run cubic model regression on the data:
+```{r}
+cubmodel = lm(dataset, formula = V2~poly(V1, 3, raw=TRUE))
+cubmodel
+```
+#### 2) Determine the point estimate of $\alpha$ and $\beta$, along with $R^2$:
+```{r}
+attributes(cubmodel)
+```
+
+##### a) Determine the point estimate of $\alpha$ and $\beta$:
+```{r}
+cubmodel$coefficients[1]
+cubmodel$coefficients[2]
+cubmodel$coefficients[3]
+cubmodel$coefficients[4]
+```
+
+##### b) Determine $R^2$
+```{r}
+summary(cubmodel)
+```
+#### 3) Residual analysis:
+```{r}
+plot(residuals(cubmodel))
+qqnorm(residuals(cubmodel))
+qqline(residuals(cubmodel))
+```
+
+#### 4) Plot of the regression line:
+```{r}
+attach(dataset)
+x2 = V1^2
+x3 = V1^3
+plot(dataset[,1], dataset[,2], xlab = "X", ylab = "y", main = "Linear regression Plot")
+tvcm = seq(0, 20, 0.1)
+pccm = predict(cubmodel, list(V1=tvcm, x2=tvcm^2, x3=tvcm^3))
+lines(tvcm, pccm, lwd=3)
+detach(dataset)
+```
+
+### D) The exponential model
+
+#### 1) Run exponential model regression on the data:
+```{r}
+attach(dataset)
+logx = log(V1)
+logy = log(V2)
+expmodel = lm(dataset, formula = logy~V1)
+expmodel
+detach(dataset)
+```
+Converting the result into exponential form  
+$\ln{y}=2.712 + 0.248x \implies y = e^{2.712+0.248x}$, and since:
+```{r}
+exp(2.712)
+```
+The least regression line is $\approx 15.05936e^{0.248x}$
+
+#### 2) Determine the point estimate of $\alpha$ and $\beta$, along with $R^2$:
+```{r}
+attributes(expmodel)
+```
+
+##### a) Determine the point estimate of $\alpha$ and $\beta$:
+```{r}
+exp(expmodel$coefficients[1])
+expmodel$coefficients[2]
+```
+
+##### b) Determine $R^2$
+```{r}
+summary(expmodel)
+```
+
+#### 3) Residual analysis:
+```{r}
+plot(residuals(expmodel))
+qqnorm(residuals(expmodel))
+qqline(residuals(expmodel))
+```
+
+#### 4) Plot of the regression line
+```{r}
+plot(dataset[,1], dataset[,2], xlab = "X", ylab = "y", main = "Linear regression Plot")
+tvem = seq(0, 20, 0.1)
+pcem = exp(predict(expmodel, list(V1 = tvem)))
+lines(tvem, pcem, lwd=3)
+```
+
+\pagebreak
+# Summary of results
+
+## A) The linear model
+The regression line is $y = -1859.2 + 175.1x$, which fit the model with an adjusted $R^2$ of 0.992. However, the residual plot seems to form an U-shaped pattern, which suggest an unexplained regressors in the data. Thus, the linear model might not be a good fit.  
+
+## B) The quadratic model
+The regression line is $y = -506.339 -4.772x +5.803x^2$, which adjusted $R^2$ value is 0.9984. The residual plot also seems to scatter randomly over the XY plane, as well as the qqplot forming a straightline, indication of a good model.
+
+## C) The cubic model
+The regression line is $y = 165.4322 - 139.6757x +14.664x^2 - 0.1906x^3$, while the adjusted $R^2$ value is also 0.9984. Similar to the quadratic model, the residual plot also scatter randomly over the XY plane with the qqplot forming a straight line.
+
+## D) The exponential model
+The regression line is $y = 15.05936e^{0.248x}$, with an adjusted $R^2$ value of 0.9471. Nevertheless, both residual analysis and linear regression plot indicates major problem, implying potential problems of the expontential model.
+
+## Conclusion:  
+Among all of the 4 models, both quadratic model and cubic model demonstrate good fit. However, by Ockham razor, the quadratic model would be prefereable with the regression curve $y = -506.339 -4.772x +5.803x^2$. An alternate regression curve could also be found uisng the linear modeling with orthogonal polynomials as follow
+```{r}
+attach(dataset)
+lm(dataset, formula = V2~poly(V1,2))
+detach(dataset)
+```
+which yields a regression curve $y = 855.2 -2843.4x + 224.7 x^2$.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

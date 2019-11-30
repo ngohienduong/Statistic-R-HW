@@ -1,0 +1,23 @@
+---
+title: "HW86"
+author: "Duong Ngo"
+date: "10/28/2019"
+output: pdf_document
+header-includes: 
+    - \usepackage{amsmath}
+---
+
+## Problem 8.7.3
+c) Since we have the value of the test statistic:
+```{r}
+(232.6-230)/(10/4)
+```
+is outside the critical region
+```{r}
+qnorm(0.9)
+```
+thus we do not reject $H_0$  
+d) The one-tailed P value is:
+```{r}
+1-pnorm(1.04)
+```

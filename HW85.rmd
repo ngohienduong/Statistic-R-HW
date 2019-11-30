@@ -1,0 +1,133 @@
+---
+title: "HW 85"
+author: "Duong Ngo"
+date: "10/25/2019"
+output: pdf_document
+header-includes: 
+    - \usepackage{amsmath}
+---
+
+## Problem 8.5.1
+a) The power function of the test is $\phi(\frac{22.5-\mu}{\sqrt{2.25}})$
+b) The significance level of the test is the value of the power function at $\mu =25$, which is:
+```{r}
+pnorm((22.5-25)/sqrt(2.25))
+```
+## Problem 8.5.3
+a) The power function of the test is $\phi(\frac{510.7-\mu}{\sqrt{225}})$
+b)  The significance level of the test is the value of the power function at $\mu =530$, which is:
+```{r}
+pnorm((510.7-530)/sqrt(225))
+```
+c) At $\mu = 510.77$, the value of K is:
+```{r}
+pnorm(0)
+```
+d)Plot K 
+```{r}
+p1= 460
+pvec2 = numeric()
+Kvec2 = numeric()
+while (p1<550)
+{pvec2 = c(pvec2, p1)
+Kvec2 = c(Kvec2,pnorm((510.7-p1)/25))
+p1 = p1+1 
+}
+plot(pvec2, Kvec2,"l")
+```
+e) The p-value when $x =507.35$ is:
+```{r}
+pnorm((507.35-530)/sqrt(225))
+```
+The p-value when $x =497.45$ is:
+```{r}
+pnorm((497.45-530)/sqrt(225))
+```
+         
+## Problem 8.5.4
+a) Since the variance is 100, the sample size is 25, critical region is $\mu \geq 83$ (the area on the right of the curve), the power function of the test is $1-\phi(\frac{83-\mu}{\sqrt{100/25}})$
+b) The significance level $\alpha$ for $\mu = 80$ is:
+```{r}
+1- pnorm((83-80)/sqrt(100/25))
+```
+c) The value of K(80) is:
+```{r}
+1- pnorm((83-80)/sqrt(100/25))
+```
+The value of K(83) is:
+```{r}
+1- pnorm((83-83)/sqrt(100/25))
+```
+The value of K(86) is:
+```{r}
+1- pnorm((83-86)/sqrt(100/25))
+```
+d)Plot K 
+```{r}
+p=0
+pvec1 = numeric()
+Kvec1 = numeric()
+while (p<140)
+{pvec1 = c(pvec1, p)
+Kvec1 = c(Kvec1,1-pnorm((83-p)/sqrt(100/25)))
+p = p+1 
+}
+plot(pvec1, Kvec1,"l")
+```
+
+e) The p value when $x=83.41$ is:
+```{r}
+1-pnorm((83.41-80)/sqrt(100/25))
+```
+## Problem 8.5.5
+The power function of the test is $1-\phi(\frac{c-\mu}{\sqrt{0.09/n}})$  
+For $\mu = 1.5$, $\alpha = 0.05$.  For $\mu = 1.7$, $\alpha = 0.95$
+Thus we obtain the system of equations:  
+\begin{align*}
+1-\phi(\frac{c-1.5}{\sqrt{0.09/n}})=0.05\\
+1-\phi(\frac{c-1.7}{\sqrt{0.09/n}})=0.95
+\end{align*}
+Since
+```{r}
+qnorm(0.05)
+qnorm(0.95)
+```
+We obtain:  
+\begin{align}
+&\frac{c-1.5}{\sqrt{0.09/n}}=1.644854\\
+&\frac{c-1.7}{\sqrt{0.09/n}}=-1.644854
+\end{align}
+From (2)-(1), we have  
+$\frac{0.2}{\sqrt{0.09/n}}\approx 3.2896$
+Thus $n \approx 24.35$. Since the sample size must be an integer, we take $n=25$  
+Substitue n =24.35 into (1), we obtain c =1.6
+
+## Problem 8.5.7
+The power function of the test is $1-\phi(\frac{c-\mu}{\sqrt{140/n}})$  
+For $\mu = 715$, $\alpha = 0.05$.  For $\mu = 650$, $\alpha = 0.9$
+Thus we obtain the system of equations:  
+\begin{align*}
+1-\phi(\frac{c-715}{\sqrt{140/n}})=0.05\\
+1-\phi(\frac{c-650}{\sqrt{140/n}})=0.9
+\end{align*}
+Since
+```{r}
+qnorm(0.05)
+qnorm(0.9)
+```
+We obtain:  
+\begin{align}
+&\frac{c-715}{\sqrt{140/n}}=-1.644854\\
+&\frac{c-650}{\sqrt{140/n}}=1.281552
+\end{align}
+From (2)-(1), we have  
+$\frac{65}{\sqrt{140/n}}\approx 2.926406$
+Thus $n \approx 39.74$. Since the sample size must be an integer, we take $n=40$  
+Substitue n =24.35 into (1), we obtain c =678.47
+
+## Problem 8.5.12
+a) The sum of three random exponential distribution $X_1, X_2, X_3$ is a gamma distribution with $\alpha =3$ with similar $\theta$ to the exponential distribution.Thus, the power function of the test is:  
+\begin{align*}
+K(\theta)= \int_0^2 \frac{x^2e^{-x/\theta}}{2\theta^2}
+\end{align*}
+b) 

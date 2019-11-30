@@ -1,0 +1,185 @@
+---
+title: "Homework 8.1"
+author: "Duong Ngo"
+date: "10/16/2019"
+output: pdf_document
+header-includes: 
+    - \usepackage{amsmath}
+---
+
+## Problem 8.1.2
+a) The value of the test statistic is:
+```{r}
+(12.6-13)/(0.2/sqrt(25))
+```
+Since $-10<z_{0.025}$, we reject $H_0$  
+b) The value of the test statistic is:
+```{r}
+(12.9-13)/(0.2/sqrt(25))
+```
+Since $-2.5<z_{0.025}$, we reject $H_0$  
+c)  
+In case a) the P value is:  
+```{r}
+pnorm(-10)
+```
+In case b) the P value is:  
+```{r}
+pnorm(-2.5)
+```
+## Problem 8.1.3
+a) The value of the test statistic is:  
+$\frac{\bar{X}-170}{\sigma/\sqrt{n}}=\frac{\bar{X}-170}{2}$  
+Plotting the value showing the critical region of $\alpha=0.05$  
+```{r}
+xseq=seq(-4,4,.01)
+densities=dnorm(xseq, 0,1)
+plot(xseq, densities,xlab="", ylab="Density", type="l", main="PDF of Standard Normal")
+```
+b) The sample mean is:
+```{r}
+d8113 = read.table('8_1-03.txt')
+m8113 = mean(d8113[,1])
+m8113
+```
+The value of the test statistic is:
+```{r}
+(m8113-170)/2
+```
+Since $1.26<1.645$, we do not reject $H_{0}$
+c) The p value is:
+```{r}
+1-pnorm(1.26)
+```
+## Problem 8.1.4
+a) In case the variance is unknown, the value of the test statistic is:  
+$\frac{\bar{X}-7.5}{S/\sqrt{10}}$
+Since we have:
+```{r}
+qt(0.025,9)
+```
+The critical region at $\alpha=0.05$ for two-sided alternative hypothesis is:   
+$t\geq\mid2.262157\mid)$
+Plotting the value showing the critical region of $\alpha=0.05$  
+```{r}
+xseq=seq(-4,4,.01)
+densities=dnorm(xseq, 0,1)
+plot(xseq, densities,xlab="", ylab="Density", type="l", main="PDF of Standard Normal")
+```
+b) The sample mean and standard deviation is:
+```{r}
+d8114 = read.table('8_1-04.txt')
+m8114 = mean(d8114[,1])
+sd8114 = sd(d8114[,1])
+```
+Thus the value of the test statistic is:
+```{r}
+(m8114-7.5)/(sd8114/sqrt(10))
+```
+Since the value of the test statistic is within the critical region, we do not reject $H_0$  
+c) The 95% confidence interval of the mean is:
+```{r}
+c(m8114+qt(0.025, 9)*sd8114/sqrt(10), m8114-qt(0.025, 9)*sd8114/sqrt(10))
+```
+Thus 7.5 is contained within the 95% confidence interval of the mean  
+## Problem 8.1.6
+a) The null hypothesis is $\mu=3.4$
+b) The alternative hypothesis is $\mu>3.4$
+c) The test statistic is:
+$\frac{\bar{X}-3.4}{S/3}$
+d) We have:
+```{r}
+qt(0.95, 8)
+```
+Thus one-sided critical region for $\alpha=0.05$ is:  
+$t\geq1.859548$  
+Plotting the value showing the critical region of $\alpha=0.05$    
+```{r}
+xseq=seq(-4,4,.01)
+densities=dnorm(xseq, 0,1)
+plot(xseq, densities,xlab="", ylab="Density", type="l", main="PDF of Standard Normal")
+```
+e) The sample mean and sample standard deviation is:
+```{r}
+d8116 = read.table('8_1-06.txt')
+m8116 = mean(d8116[,1])
+sd8116 = sd(d8116[,1])
+```
+Thus the value of the test statistic is:
+```{r}
+(m8116-3.4)/(sd8116/3)
+```
+f) Since 2.8 is in the critical region of the test statistic, we reject $H_{0}$
+g) The p value is
+```{r}
+1-pt(2.8, 8)
+```
+## Problem 8.1.9
+a) The sample mean and variance is:
+```{r}
+d8119 = read.table('8_1-09.txt')
+m8119 = mean(d8119[,1])
+sd8119 =sd(d8119[,1])
+```
+Thus the value of the test statistic is:
+```{r}
+(m8119-15.7)/(sd8119/sqrt(33))
+```
+The p value for the test is:
+```{r}
+pt(-4.599006, 32)
+```
+b) Since the p value is in the critical region, we reject $H_{0}$
+c) The upper bound of one-sided confidence interval for the mean is
+```{r}
+m8119+qt(0.98,32)*sd8119/sqrt(33)
+```
+## Problem 8.1.11
+The critical region value is:
+```{r}
+qt(0.95, 9)
+```
+The mean and the standard deviation of d is:
+```{r}
+d8111 = read.table('8_1-11.txt')
+m8111 = mean(d8111[,1]-d8111[,2])
+sd8111 = sd(d8111[,1]-d8111[,2])
+```
+The value of the test statistic is:
+```{r}
+m8111/(sd8111/sqrt(10))
+```
+Since the value of the test statistic is within the critical region, we do not reject $H_0$
+## Problem 8.1.13  
+a)  
+The critical region value is:
+```{r}
+qt(0.95, 19)
+```
+Plotting the value showing the critical region of $\alpha=0.05$  
+```{r}
+xseq=seq(-4,4,.01)
+densities=dnorm(xseq, 0,1)
+plot(xseq, densities,xlab="", ylab="Density", type="l", main="PDF of Standard Normal")
+```
+From the plot, we see the critical region is $t\leq 1.729133$  
+b) The sample mean and standard deviation of the data is:
+```{r}
+d81113 = read.table('8_1-13.txt')
+m81113 = mean(d81113[,1]-d81113[,2])
+sd81113 = sd(d81113[,1]-d81113[,2])
+```
+The value of the test statistic is:
+```{r}
+m81113/(sd81113/sqrt(20))
+```
+Since the value of the test statistic is outside of the critical region, we reject $H_0$  
+c) The critical region at $\alpha = 0.01$ is:  
+```{r}
+qt(0.01, 19)
+```
+Since the test statistic is within the critical region, we do not reject $H_0$ when $\alpha = 0.01$  
+d) The p value is:
+```{r}
+1- pt(2.248709, 19)
+```
